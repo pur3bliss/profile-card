@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Card</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --accent: #3498db;
+      --bg: #f8f9fa;
+      --text: #333;
+      --radius: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    article[data-testid="test-profile-card"] {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+
+    article[data-testid="test-profile-card"]:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Layout for wider screens */
+    @media (min-width: 700px) {
+      article[data-testid="test-profile-card"] {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      figure {
+        flex: 1;
+        margin: 0;
+      }
+
+      .profile-info {
+        flex: 2;
+        padding: 1.5rem;
+      }
+    }
+
+    figure {
+      text-align: center;
+      margin: 0;
+      padding: 1.5rem;
+    }
+
+    img[data-testid="test-user-avatar"] {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    h2[data-testid="test-user-name"] {
+      font-size: 1.8rem;
+      margin: 0.5rem 0;
+      color: var(--primary);
+    }
+
+    p[data-testid="test-user-bio"] {
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    nav[data-testid="test-user-social-links"] ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    nav[data-testid="test-user-social-links"] a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav[data-testid="test-user-social-links"] a:focus,
+    nav[data-testid="test-user-social-links"] a:hover {
+      text-decoration: underline;
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    section {
+      margin-top: 1rem;
+    }
+
+    section ul {
+      padding-left: 1.2rem;
+    }
+
+    .time {
+      font-size: 0.9rem;
+      color: gray;
+      margin-top: 0.5rem;
+    }
+
+  </style>
+</head>
+<body>
+  <article data-testid="test-profile-card">
+    
+    <figure>
+      <img src="./image/profile-photo.jpg" alt="Profile photo" data-testid="test-user-avatar">
+    </figure>
+
+    <div class="profile-info">
+      <header>
+        <h2 data-testid="test-user-name">Tomachukwu Ihebuzor</h2>
+      </header>
+
+      <p data-testid="test-user-bio">
+        Frontend developer passionate about building accessible, responsive and modern web interfaces.
+      </p>
+
+        <div class="time" aria-label="Current Time">
+            <strong>Local Time:</strong> 
+            <span id="readable-time" data-testid="test-user-readable-time"></span>
+            <span data-testid="test-user-time" hidden></span>
+        </div>
+
+      <nav data-testid="test-user-social-links" aria-label="Social Links">
+        <ul>
+          <li><a href="https://github.com/pur3bliss" target="_blank" rel="noopener noreferrer" data-testid="test-user-social-github">GitHub</a></li>
+          <li><a href="https://x.com/pur3bliss" target="_blank" rel="noopener noreferrer" data-testid="test-user-social-x">X</a></li>
+          <li><a href="https://www.linkedin.com/in/tomachukwu" target="_blank" rel="noopener noreferrer" data-testid="test-user-social-linkedin">LinkedIn</a></li>
+        </ul>
+      </nav>
+
+      <section aria-labelledby="hobbies-heading">
+        <h3 id="hobbies-heading">Hobbies</h3>
+        <ul data-testid="test-user-hobbies">
+          <li>Flying drones</li>
+          <li>Listening to music</li>
+          <li>Martial arts</li>
+          <li>Swimming</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="dislikes-heading">
+        <h3 id="dislikes-heading">Dislikes</h3>
+        <ul data-testid="test-user-dislikes">
+          <li>Procrastination</li>
+          <li>Unclear documentation</li>
+          <li>Being Unreliable</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+
+  <script>
+        const readableEl = document.getElementById('readable-time');
+        const msEl = document.querySelector('[data-testid="test-user-time"]');
+
+        function updateTime() {
+            const now = new Date();
+            msEl.textContent = Date.now(); // for automated testing
+            readableEl.textContent = now.toLocaleTimeString(); // for humans
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+  </script>
+</body>
+</html>
