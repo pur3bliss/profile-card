@@ -19,18 +19,43 @@
       background-color: var(--bg);
       color: var(--text);
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      padding: 1rem;
     }
 
+    /* NAVIGATION */
+    nav[data-testid="test-main-nav"] {
+      width: 100%;
+      background: gray;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    nav[data-testid="test-main-nav"] a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav[data-testid="test-main-nav"] a:hover,
+    nav[data-testid="test-main-nav"] a:focus {
+      color: var(--accent);
+      outline: none;
+    }
+
+    /* PROFILE CARD */
     article[data-testid="test-profile-card"] {
       background: #fff;
       border-radius: var(--radius);
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       max-width: 600px;
-      width: 100%;
+      width: 90%;
+      margin-top: 2rem;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -41,7 +66,6 @@
       transform: translateY(-4px);
     }
 
-    /* Layout for wider screens */
     @media (min-width: 700px) {
       article[data-testid="test-profile-card"] {
         flex-direction: row;
@@ -117,12 +141,19 @@
       color: gray;
       margin-top: 0.5rem;
     }
-
   </style>
 </head>
 <body>
+
+  <!-- MAIN NAV -->
+  <nav data-testid="test-main-nav" aria-label="Main Navigation">
+    <a href="./index.html" data-testid="nav-profile">Profile</a>
+    <a href="./contact.html" data-testid="nav-contact">Contact</a>
+    <a href="./about.html" data-testid="nav-about">About</a>
+  </nav>
+
+  <!-- PROFILE CARD -->
   <article data-testid="test-profile-card">
-    
     <figure>
       <img src="./image/profile-photo.jpg" alt="Profile photo" data-testid="test-user-avatar">
     </figure>
@@ -136,11 +167,11 @@
         Frontend developer passionate about building accessible, responsive and modern web interfaces.
       </p>
 
-        <div class="time" aria-label="Current Time">
-            <strong>Local Time:</strong> 
-            <span id="readable-time" data-testid="test-user-readable-time"></span>
-            <span data-testid="test-user-time" hidden></span>
-        </div>
+      <div class="time" aria-label="Current Time">
+        <strong>Local Time:</strong> 
+        <span id="readable-time" data-testid="test-user-readable-time"></span>
+        <span data-testid="test-user-time" hidden></span>
+      </div>
 
       <nav data-testid="test-user-social-links" aria-label="Social Links">
         <ul>
@@ -165,24 +196,24 @@
         <ul data-testid="test-user-dislikes">
           <li>Procrastination</li>
           <li>Unclear documentation</li>
-          <li>Being Unreliable</li>
+          <li>Being unreliable</li>
         </ul>
       </section>
     </div>
   </article>
 
   <script>
-        const readableEl = document.getElementById('readable-time');
-        const msEl = document.querySelector('[data-testid="test-user-time"]');
+    const readableEl = document.getElementById('readable-time');
+    const msEl = document.querySelector('[data-testid="test-user-time"]');
 
-        function updateTime() {
-            const now = new Date();
-            msEl.textContent = Date.now(); // for automated testing
-            readableEl.textContent = now.toLocaleTimeString(); // for humans
-        }
+    function updateTime() {
+      const now = new Date();
+      msEl.textContent = Date.now(); 
+      readableEl.textContent = now.toLocaleTimeString();
+    }
 
-        updateTime();
-        setInterval(updateTime, 1000);
+    updateTime();
+    setInterval(updateTime, 1000);
   </script>
 </body>
 </html>
